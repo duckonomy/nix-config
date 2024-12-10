@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, userConfig, ... }:
+{ config, pkgs, ... }:
 
 {
   imports = [
@@ -22,8 +22,8 @@
     };
 
     # Flakes
-    package = pkgs.nixVersions.git;
-    registry.nixpkgs.flake = inputs.nixpkgs;
+    package = pkgs.nixFlakes; # pkgs.nixVersions.git;
+    # registry.nixpkgs.flake = inputs.nixpkgs;
 
     settings = {
       auto-optimise-store = true;
@@ -64,6 +64,14 @@
     };
     supportedFilesystems = [ "ntfs" ];
     tmp.cleanOnBoot = true;
+
+    initrd.luks.devices = {
+      root = {
+        # Use https://nixos.wiki/wiki/Full_Disk_Encryption
+        device = "/dev/disk/by-uuid/TO find this hash use lsblk -f. It's the UUID of nvme0n1p2";
+        preLVM = true;
+      };
+    };
   };
 
   zramSwap = {
