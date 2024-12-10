@@ -1,4 +1,12 @@
-{userConfig, ...}: {
+{...}: {
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    enableZshIntegration = true;
+  };
+}
+
+  {userConfig, ...}: {
   programs.git = {
     enable = true;
     userName = userConfig.fullName;

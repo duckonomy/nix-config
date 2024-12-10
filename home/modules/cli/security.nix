@@ -1,4 +1,10 @@
-{pkgs, ...}: {
+{...}: {
+  programs.password-store = {
+    enable = true;
+  };
+}
+
+  {pkgs, ...}: {
   programs.gpg = {
     enable = true;
     settings = {
@@ -25,6 +31,14 @@
     };
   };
 
+  services.ssh-agent.enable
+    programs.ssh.enable
+    programs.ssh.addKeysToAgent
+    programs.ssh.extraConfig
+    programs.ssh.hashKnownHosts
+    programs.ssh.matchBlocks
+
+
   services.gpg-agent = {
     enable =
       if pkgs.stdenv.isDarwin
@@ -40,6 +54,5 @@
       allow-emacs-pinentry
       allow-loopback-pinentry
     '';
-    # pinentryPackage = pkgs.pinentry-gnome3;
   };
 }

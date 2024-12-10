@@ -1,18 +1,11 @@
 {...}: {
   imports = [
     ./modules/common.nix
-    # ./desktop/sway.nix
-
-    # COMMENTED
-    # ./modules/gui/zoom.nix
-
+    ./modules/desktop/sway.nix
+    ./modules/gui/zoom.nix
     ./modules/gui/mpv.nix
-
-    # COMMENTED
-    # ./modules/gui/browser.nix
-    # ./modules/gui/browser-pass.nix
-
-    # ./modules/gui/packages.nix
+    ./modules/gui/browser.nix
+    ./modules/gui/packages.nix
   ];
 
 

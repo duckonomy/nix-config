@@ -2,17 +2,22 @@
   pkgs,
   ...
 }: let
-  wallpaper = ./../../files/wallpapers/wallpaper.jpg;
+  # wallpaper = ./../../files/wallpapers/wallpaper.jpg;
   sway_config = ./../../files/configs/sway/config;
 in {
   imports = [
+    ./avizo.nix
     ./cliphist.nix
+    ./fuzzel.nix
+    ./gnome-keyring.nix
     ./gtk.nix
     ./kanshi.nix
-    ./swappy.nix
-    ./swaync.nix
+    ./mako.nix
+    ./swayidle.nix
+    ./swaylock.nix
+    ./swayosd.nix
+    ./udiskie.nix
     ./waybar.nix
-    ./wofi.nix
     ./xdg.nix
   ];
 

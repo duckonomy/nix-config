@@ -4,10 +4,11 @@
     libadwaita
     pavucontrol
     wl-clipboard
-    rofi-pass
-    rofi
-    # ibus-engines.hangul
+    networkmanager_dmenu
+    fuzzel
     brightnessctl
     libnotify
+    grim
+    slurp
   ];
 }

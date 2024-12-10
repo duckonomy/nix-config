@@ -4,9 +4,5 @@
     nodejs
     python3
     gcc
-    ansible
-    docker-compose
-    wofi
-    imagemagick
   ];
 }

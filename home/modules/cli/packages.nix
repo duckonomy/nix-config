@@ -4,8 +4,8 @@
     curl
     unzip
     unrar
+    p7zip
     killall
-    pass
     yt-dlp
     jq
     dash
@@ -14,5 +14,9 @@
     bc
     fd
     ngrok
+    ansible
+    docker-compose
+    imagemagick
+    ffmpeg
   ];
 }

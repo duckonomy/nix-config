@@ -1,6 +1,6 @@
 .PHONY: update
 update:
-	home-manager switch --flake .#duckonomy@duckonomy-nixos
+	home-manager switch --flake .#duckonomy@nixos
 
 .PHONY: clean
 clean:

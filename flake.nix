@@ -46,14 +46,13 @@
   } @ inputs: let
     inherit (self) outputs;
 
-
     users = {
-      iannn = {
+      duckonomy = {
         # avatar = ./files/avatar/face;
         email = "contact@duckonomy.com";
         fullName = "Ian Park";
         # gitKey = "C5810093";
-        name = "iannn";
+        name = "duckonomy";
       };
     };
 
@@ -98,25 +97,25 @@
   in {
 
     nixosConfigurations = {
-      duckonomy-nixos = mkNixosConfiguration "duckonomy-nixos" "iannn";
+      nixos = mkNixosConfiguration "nixos" "duckonomy";
     };
 
     darwinConfigurations = {
-      "duckonomy-mac" = mkDarwinConfiguration "duckonomy-mac" "iannn";
+      "mac" = mkDarwinConfiguration "mac" "duckonomy";
     };
 
     # https://github.com/nix-community/home-manager/issues/1341
     # https://github.com/nix-community/home-manager/issues/432
     # https://github.com/hraban/mac-app-util
     homeConfigurations = {
-      "duckonomy@duckonomy-mac" = mkHomeConfiguration "aarch64-darwin" "iannn" "duckonomy-mac";
-      "duckonomy@duckonomy-nixos" = mkHomeConfiguration "x86_64-linux" "iannn" "duckonomy-nixos";
+      "duckonomy@mac" = mkHomeConfiguration "aarch64-darwin" "duckonomy" "mac";
+      "duckonomy@nixos" = mkHomeConfiguration "x86_64-linux" "duckonomy" "nixos";
     };
 
     overlays = import ./overlays {inherit inputs;};
 
     # homeConfigurations = {
-    #   iannnProfile = home-manager.lib.homeManagerConfiguration {
+    #   duckonomyProfile = home-manager.lib.homeManagerConfiguration {
     #     inherit pkgs;
     #     modules = [ ./home.nix ];
     #   };
