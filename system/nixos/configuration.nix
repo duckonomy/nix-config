@@ -1,4 +1,4 @@
-{ config, pkgs, userConfig, ... }:
+{ config, pkgs, inputs, userConfig, ... }:
 
 {
   imports = [
@@ -28,7 +28,7 @@
     settings = {
       auto-optimise-store = true;
 
-      trusted-users = [ "root" ${userConfig.name} ];
+      trusted-users = [ "root" "duckonomy" ];
 
       warn-dirty = false;
 
@@ -63,7 +63,7 @@
       efi.canTouchEfiVariables = true;
     };
     supportedFilesystems = [ "ntfs" ];
-    cleanTmpDir = true;
+    tmp.cleanOnBoot = true;
   };
 
   zramSwap = {
@@ -77,9 +77,7 @@
     inputMethod = {
       enable = true;
       type = "kime";
-      kime.config = {
-        indicator.icon_color = "White";
-      };
+      kime.iconColor = "White";
     # inputMethod = {
     #   enabled = "ibus";
     #   ibus.engines = with pkgs.ibus-engines; [hangul];
@@ -94,12 +92,9 @@
 
   time.timeZone = "Asia/Seoul";
 
-  sound.enable = true;
-
   networking = {
     hostName = "nixos";
     wireless = {
-      enable = true;
       iwd.enable = true;
       userControlled.enable = true;
     };
@@ -118,8 +113,9 @@
   services = {
     xserver = {
       videoDrivers = [ "intel" ];
-      libinput.enable = true;
     };
+
+    libinput.enable = true;
 
     blueman.enable = true;
 
@@ -130,20 +126,25 @@
 
     pipewire = {
       enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
       pulse.enable = true;
-      wireplumber.extraConfig."10-bluez" = {
-        "monitor.bluez.properties" = {
-          "bluez5.enable-sbc-xq" = true;
-          "bluez5.enable-msbc" = true;
-          "bluez5.enable-hw-volume" = true;
-          "bluez5.roles" = [
-            "hsp_hs"
-            "hsp_ag"
-            "hfp_hf"
-            "hfp_ag"
-          ];
+      wireplumber= {
+        enable = true;
+        wireplumber.extraConfig."10-bluez" = {
+          "monitor.bluez.properties" = {
+            "bluez5.enable-sbc-xq" = true;
+            "bluez5.enable-msbc" = true;
+            "bluez5.enable-hw-volume" = true;
+            "bluez5.roles" = [
+              "hsp_hs"
+              "hsp_ag"
+              "hfp_hf"
+              "hfp_ag"
+            ];
+          };
         };
       };
     };
@@ -174,7 +175,7 @@
       settings = {
         default_session = {
           command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
-          user = ${userConfig.name};
+          user = "duckonomy";
         };
       };
     };
@@ -185,19 +186,19 @@
   hardware = {
     enableAllFirmware = true;
 
-    pulseaudio = {
-      enable = true;
-      support32Bit = true;
-      extraModules = [ pkgs.pulseaudio-modules-bt ];
-      extraConfig = ''
-        load-module module-switch-on-connect
-      '';
-      package = pkgs.pulseaudioFull;
-      tcp = {
-        enable = true;
-        anonymousClients.allowedIpRanges = ["127.0.0.1"];
-      };
-    };
+    # pulseaudio = {
+    #   enable = true;
+    #   support32Bit = true;
+    #   extraModules = [ pkgs.pulseaudio-modules-bt ];
+    #   extraConfig = ''
+    #     load-module module-switch-on-connect
+    #   '';
+    #   package = pkgs.pulseaudioFull;
+    #   tcp = {
+    #     enable = true;
+    #     anonymousClients.allowedIpRanges = ["127.0.0.1"];
+    #   };
+    # };
 
     bluetooth = {
       enable = true;
@@ -205,14 +206,14 @@
       package = pkgs.pulseaudioFull;
     };
 
-    opengl = {
+    graphics = {
       enable = true;
-      driSupport = true;
-      driSupport32bit = true;
+      enable32Bit = true;
       extraPackages = with pkgs; [
         intel-media-driver
-        vaapiIntel
-        vaapiVdpau
+        intel-ocl
+        intel-vaapi-driver
+        libva-vdpau-driver
         libvdpau-va-gl
       ];
     };
@@ -235,14 +236,14 @@
   users = {
     mutableUsers = true;
     defaultUserShell = pkgs.zsh;
-    users.${userConfig.name} = {
+    users.duckonomy = {
       isNormalUser = true;
-      home = "/home/${userConfig.name}";
+      home = "/home/duckonomy";
       description = "${userConfig.fullName}";
       extraGroups = [ "wheel" "networkmanager" "docker" "audio" "video" "lp" "scanner"];
       shell = pkgs.zsh;
     };
-    extraGroups.vboxusers.members = [ ${userConfig.name} ];
+    extraGroups.vboxusers.members = [ "duckonomy" ];
   };
 
   environment = {
@@ -290,7 +291,7 @@
            )
             {
               return polkit.Result.YES;
-            }
+            };
         });
       '';
     };
@@ -305,7 +306,7 @@
         swaylock = {};
         greetd.enableGnomeKeyring = true
       };
-    }
+    };
   };
 
   xdg.portal = {
@@ -329,4 +330,4 @@
       };
     };
   };
-};
+}
