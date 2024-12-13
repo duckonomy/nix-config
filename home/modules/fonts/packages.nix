@@ -15,5 +15,6 @@
     powerline-fonts
     material-icons
     unifont
+    lexend
   ];
 }

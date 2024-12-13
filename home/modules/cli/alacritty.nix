@@ -10,7 +10,7 @@
       window.decorations = "Full";
       font = {
         normal.family = "Iosevka Term Nerd Font";
-        size = 12;
+        size = 15;
       };
       # Colors (Everforest)
       colors = {

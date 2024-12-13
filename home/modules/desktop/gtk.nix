@@ -6,21 +6,30 @@
   gtk = {
     enable = true;
     theme = {
-      name = "Adwaita";
-      package = pkgs.gnome3.gnome_themes_standard;
+      name = "Adwaita-dark";
+      package = pkgs.gnome-themes-extra;
     };
+
+    gtk4.extraConfig = {
+      gtk-application-prefer-dark-theme = 1;
+    };
+
     iconTheme = {
       name = "Adwaita";
-      package = pkgs.gnome3.adwaita-icon-theme;
+      package = pkgs.adwaita-icon-theme;
     };
     cursorTheme = {
-      name = "Adwaita";
+      name = "Bibata-Modern-Classic";
     };
     font = {
       package = pkgs.inter;
-      size = 12;
+      name = "Inter";
+      size = 10;
     };
     gtk3 = {
+      extraConfig = {
+        gtk-application-prefer-dark-theme = 1;
+      };
       bookmarks = [
         "file:///home/${userConfig.name}/Documents"
         "file:///home/${userConfig.name}/Downloads"

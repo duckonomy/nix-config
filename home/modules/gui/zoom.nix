@@ -1,4 +1,4 @@
-{userConfig, ...}: let
+{userConfig, pkgs, ...}: let
   pinnedZoomPkgs =
     import (builtins.fetchTarball {
       url = "https://github.com/NixOS/nixpkgs/archive/0c19708cf035f50d28eb4b2b8e7a79d4dc52f6bb.tar.gz";
@@ -13,6 +13,7 @@ in {
   # Install last Zoom version (6.0.2.4680) with working Wayland screen sharing
   home.packages = [
     pinnedZoom
+    #pkgs.zoom
   ];
 
   # Configure Zoom-us settings from the home-manager store

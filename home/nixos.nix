@@ -2,6 +2,7 @@
   imports = [
     ./modules/common.nix
     ./modules/desktop/sway.nix
+    ./modules/desktop/packages.nix
     ./modules/gui/zoom.nix
     ./modules/gui/mpv.nix
     ./modules/gui/browser.nix

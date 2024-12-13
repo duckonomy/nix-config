@@ -11,7 +11,7 @@
     # ./cli/scripts.nix
     ./langs/go.nix
     ./langs/packages.nix
-    ./emacs/mail.nix
+    # ./emacs/mail.nix
     # TODO: Adjust for emacs-plus
     ./emacs/emacs.nix
     ./emacs/packages.nix
@@ -20,7 +20,9 @@
   # Nixpkgs configuration
   nixpkgs = {
     overlays = [
-      outputs.overlays.stable-packages
+      (import (builtins.fetchTarball {
+        url = "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
+      }))
     ];
 
     config = {

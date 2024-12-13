@@ -18,5 +18,6 @@
     docker-compose
     imagemagick
     ffmpeg
+    pinentry-curses
   ];
 }

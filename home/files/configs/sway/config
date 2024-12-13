@@ -182,8 +182,6 @@ gaps inner 0
 gaps outer 0
 bindsym $mod+Shift+m exec bash ~/.config/sway/lock.sh
 
-exec "avizo-service"
-
 exec swaybg -m fill -i ~/Pictures/wallpapers/desert.jpg
 
 # class                   border     backgr.    text       indica.    chi.bo.

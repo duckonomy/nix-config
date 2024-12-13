@@ -9,8 +9,6 @@
     gimp
     inkscape
     zathura
-    etcher
-    google-chrome
     swayimg
     gcolor3
   ];

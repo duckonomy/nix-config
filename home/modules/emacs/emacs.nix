@@ -1,4 +1,4 @@
-{ pkgs, emacsPackage ? pkgs.emacsGcc, ... }: {
+{ pkgs, ... }: {
   # services.emacs = {
   #   enable = true;
   # };
@@ -24,11 +24,13 @@
 
   programs.emacs = {
     enable = true;
+    package = pkgs.emacs-unstable-pgtk;
     extraPackages = (epkgs:
       (with epkgs; [
         vterm
         pdf-tools
         nix-mode
+        treesit-grammars.with-all-grammars
       ]));
   };
 }

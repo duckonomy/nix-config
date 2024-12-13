@@ -23,7 +23,7 @@
     hooks = {
       postNew = ''
         # immediately archive all messages from "me"
-        notmuch tag -new -- tag:new and from:${userConfig.email}
+        notmuch tag -new -- tag:new and from:ian@ianpark.dev
 
         # delete all messages from a spammer:
         # notmuch tag +deleted -- tag:new and from:spam@spam.com
@@ -71,8 +71,8 @@
     maildirBasePath = ".mail";
     accounts."fastmail" = {
       primary = true;
-      address = ${userConfig.email};
-      userName = ${userConfig.email};
+      address = "ian@ianpark.dev";
+      userName = "ian@ianpark.dev";
       passwordCommand = "${pkgs.pass}/bin/pass mail/fastmail.com/app-password";
       imap.host = "imap.fastmail.com";
       imap.port = 993;

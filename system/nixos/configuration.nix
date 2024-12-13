@@ -22,7 +22,7 @@
     };
 
     # Flakes
-    package = pkgs.nixFlakes; # pkgs.nixVersions.git;
+    package = pkgs.nixVersions.git;
     # registry.nixpkgs.flake = inputs.nixpkgs;
 
     settings = {
@@ -34,7 +34,7 @@
 
       substituters = [
         "https://cache.nixos.org"
-        "https://cache.garnix.io"
+        #"https://cache.garnix.io"
         "https://nix-community.cachix.org"
       ];
 
@@ -64,14 +64,6 @@
     };
     supportedFilesystems = [ "ntfs" ];
     tmp.cleanOnBoot = true;
-
-    initrd.luks.devices = {
-      root = {
-        # Use https://nixos.wiki/wiki/Full_Disk_Encryption
-        device = "/dev/disk/by-uuid/TO find this hash use lsblk -f. It's the UUID of nvme0n1p2";
-        preLVM = true;
-      };
-    };
   };
 
   zramSwap = {
@@ -82,14 +74,15 @@
 
   i18n = {
     defaultLocale = "en_US.UTF-8";
+    # inputMethod = {
+    #   enable = true;
+    #   type = "kime";
+    #   kime.iconColor = "White";
+    # };
     inputMethod = {
       enable = true;
-      type = "kime";
-      kime.iconColor = "White";
-    # inputMethod = {
-    #   enabled = "ibus";
-    #   ibus.engines = with pkgs.ibus-engines; [hangul];
-    # };
+      type = "ibus";
+      ibus.engines = with pkgs.ibus-engines; [hangul];
     };
   };
 
@@ -123,6 +116,12 @@
       videoDrivers = [ "intel" ];
     };
 
+    btrfs.autoScrub = {
+      enable = true;
+      interval = "monthly";
+      fileSystems = [ "/" ];
+    };
+
     libinput.enable = true;
 
     blueman.enable = true;
@@ -141,7 +140,7 @@
       pulse.enable = true;
       wireplumber= {
         enable = true;
-        wireplumber.extraConfig."10-bluez" = {
+        extraConfig."10-bluez" = {
           "monitor.bluez.properties" = {
             "bluez5.enable-sbc-xq" = true;
             "bluez5.enable-msbc" = true;
@@ -211,7 +210,6 @@
     bluetooth = {
       enable = true;
       powerOnBoot = true;
-      package = pkgs.pulseaudioFull;
     };
 
     graphics = {
@@ -247,7 +245,7 @@
     users.duckonomy = {
       isNormalUser = true;
       home = "/home/duckonomy";
-      description = "${userConfig.fullName}";
+      description = "Ian Park";
       extraGroups = [ "wheel" "networkmanager" "docker" "audio" "video" "lp" "scanner"];
       shell = pkgs.zsh;
     };
@@ -312,7 +310,7 @@
       services = {
         sway = {};
         swaylock = {};
-        greetd.enableGnomeKeyring = true
+        greetd.enableGnomeKeyring = true;
       };
     };
   };

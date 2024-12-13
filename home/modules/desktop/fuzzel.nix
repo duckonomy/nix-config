@@ -1,10 +1,11 @@
 {...}: {
   programs.fuzzel = {
+    enable = true;
     settings = {
       main = {
-        terminal = "${pkgs.alacritty}/bin/alacritty";
+        terminal = "alacritty";
         layer = "overlay";
-        prompt = "$ ";
+        prompt = "\"$ \"";
         horizontal-pad=50;
         vertical-pad=50;
         inner-pad=20;
@@ -25,3 +26,4 @@
       };
     };
   };
+}

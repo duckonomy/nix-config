@@ -1,10 +1,8 @@
-{...}: {
+{pkgs, ...}: {
   programs.password-store = {
     enable = true;
   };
-}
 
-  {pkgs, ...}: {
   programs.gpg = {
     enable = true;
     settings = {
@@ -31,12 +29,12 @@
     };
   };
 
-  services.ssh-agent.enable
-    programs.ssh.enable
-    programs.ssh.addKeysToAgent
-    programs.ssh.extraConfig
-    programs.ssh.hashKnownHosts
-    programs.ssh.matchBlocks
+    #  services.ssh-agent.enable
+    # programs.ssh.enable
+    # programs.ssh.addKeysToAgent
+    # programs.ssh.extraConfig
+    # programs.ssh.hashKnownHosts
+    # programs.ssh.matchBlocks
 
 
   services.gpg-agent = {
@@ -50,6 +48,7 @@
     maxCacheTtlSsh = 86400;
     enableSshSupport = true;
     enableZshIntegration = true;
+    pinentryPackage = pkgs.pinentry-curses;
     extraConfig = ''
       allow-emacs-pinentry
       allow-loopback-pinentry

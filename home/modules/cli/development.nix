@@ -1,16 +1,15 @@
-{...}: {
-  programs.direnv = {
+{userConfig, ...}: {
+  programs = {
+  direnv = {
     enable = true;
     nix-direnv.enable = true;
     enableZshIntegration = true;
   };
-}
 
-  {userConfig, ...}: {
-  programs.git = {
+  git = {
     enable = true;
-    userName = userConfig.fullName;
-    userEmail = userConfig.email;
+    userName = "${userConfig.fullName}";
+    userEmail = "${userConfig.email}";
     # signing = {
     #   key = userConfig.gitKey;
     #   signByDefault = true;
@@ -29,4 +28,6 @@
       pull.rebase = "true";
     };
   };
+};
+
 }

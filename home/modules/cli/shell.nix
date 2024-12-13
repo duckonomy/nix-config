@@ -73,11 +73,7 @@
       # bindkey "^e" edit-command-line
     '';
   };
-}
 
-
-
-  {...}: {
   programs.readline = {
     enable = true;
     includeSystemConfig = true;
@@ -101,11 +97,9 @@
       expand-tilde = true;
     };
   };
-}
 
 
 
-    {...}: {
   # Starship configuration
   programs.starship = {
     enable = true;
