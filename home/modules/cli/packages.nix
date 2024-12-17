@@ -7,6 +7,8 @@
     p7zip
     killall
     yt-dlp
+    neovim
+    zellij
     jq
     dash
     nix-zsh-completions

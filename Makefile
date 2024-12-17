@@ -3,7 +3,7 @@ update:
 	home-manager switch --flake .#duckonomy@nixos --impure
 
 .PHONY: update-nixos
-update:
+update-nixos:
 	nixos-rebuild switch --flake .#nixos --impure
 
 .PHONY: clean

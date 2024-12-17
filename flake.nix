@@ -63,7 +63,7 @@
           inherit inputs outputs hostname;
           userConfig = users.${username};
         };
-        modules = [./hosts/${hostname}/configuration.nix];
+        modules = [./system/${hostname}/configuration.nix];
       };
 
     mkDarwinConfiguration = hostname: username:
@@ -74,7 +74,7 @@
           userConfig = users.${username};
         };
         modules = [
-          ./hosts/${hostname}/configuration.nix
+          ./system/${hostname}/configuration.nix
           home-manager.darwinModules.home-manager
           nix-homebrew.darwinModules.nix-homebrew
         ];

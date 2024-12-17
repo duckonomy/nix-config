@@ -47,9 +47,10 @@
       repo = "cd $HOME/Documents/repositories";
       temp = "cd $HOME/Downloads/temp";
 
-      v = "vim";
-      vi = "vim";
-      vim = "vim";
+      v = "nvim";
+      vi = "nvim";
+      vim = "nvim";
+      vimdiff = "nvim -d";
 
       ls = "eza --icons always"; # default view
       ll = "eza -bhl --icons --group-directories-first"; # long list
@@ -59,6 +60,27 @@
     initExtra = ''
       # kubectl auto-complete
       # source <(kubectl completion zsh)
+      # zstyle ':completion:*' menu select
+
+      # Zsh reverse auto-completion
+      zmodload zsh/complist
+      bindkey '^[[Z' reverse-menu-complete
+      # To get new binaries into PATH
+      zstyle ':completion:*' rehash true
+      autoload -U select-word-style
+      select-word-style bash
+
+      
+      #zstyle ':completion:*' file-sort modification
+      zstyle ':completion:*' file-sort date
+      zstyle ':completion:*' menu yes=long select
+      zstyle ':completion:*' matcher-list ''\'''\' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+      # Disable prompt disappearing on multi-lines
+      export COMPLETION_WAITING_DOTS="false"
+      export EDITOR=nvim
+
+      # zstyle ':completion:*:default' list-colors ''${(s.:.)LS_COLORS} "ma=48;5;244;38;5;255"
 
       # bindings
       bindkey '^A' beginning-of-line
@@ -71,6 +93,11 @@
       # autoload -z edit-command-line
       # zle -N edit-command-line
       # bindkey "^e" edit-command-line
+      autoload colors # color array builder
+      autoload run-help # help function
+      autoload zcalc # calculator
+      autoload zsh/terminfo # interface to terminfo database
+
     '';
   };
 
